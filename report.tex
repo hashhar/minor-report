@@ -1,34 +1,10 @@
 \documentclass[12pt,a4paper,titlepage]{report}
-\usepackage{titlesec} % Change font sizes
-\usepackage{fontspec} % Use TTF fonts
-\defaultfontfeatures{Ligatures=TeX} % Enable ligatures like --, `' etc.
-\setmainfont{Times New Roman} % Roman font
-\setmonofont{Consolas} % Monospace font
-
-\usepackage{graphicx} % Images
-\usepackage{tabularx} % Tables
-\usepackage{float} % Figures
-
-\newcommand{\chapfnt}{\fontsize{16pt}{19pt}}
-\newcommand{\secfnt}{\fontsize{14pt}{17pt}}
-\newcommand{\ssecfnt}{\fontsize{12pt}{14pt}}
-
-\titleformat{\chapter}[display]
-{\normalfont\chapfnt\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\chapfnt}
-
-\titleformat{\section}
-{\normalfont\secfnt\bfseries}{\thesection}{1em}{}
-
-\titleformat{\subsection}
-{\normalfont\ssecfnt\bfseries}{\thesubsection}{1em}{}
-
-\titlespacing*{\chapter} {0pt}{50pt}{40pt}
-\titlespacing*{\section} {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-\titlespacing*{\subsection} {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-
+\usepackage{jmireport}
 \begin{document}
 
-\input{title.tex}
+\input{tex/title.tex}
 \tableofcontents
+\listoffigures
+\listoftables
 
 \end{document}
