@@ -1,11 +1,14 @@
 \ProvidesPackage{jmireport}
 
 % Packages
-\usepackage{titlesec} % Change font sizes
+\usepackage{titlesec} % Change title formats
 \usepackage{fontspec} % Use TTF fonts
 \usepackage{graphicx} % Images
 \usepackage{tabularx} % Tables
 \usepackage{float} % Figures
+\usepackage[english]{babel} % datetime depends on it
+\usepackage[ddmmyyyy]{datetime} % Dates
+\usepackage{parskip} % No indent paragraphs
 
 % Fonts
 \defaultfontfeatures{Ligatures=TeX} % Enable ligatures like --, `' etc.
@@ -18,8 +21,8 @@
 \newcommand{\secfnt}{\fontsize{14pt}{17pt}}
 \newcommand{\ssecfnt}{\fontsize{12pt}{14pt}}
 
-\titleformat{\chapter}[display]
-{\normalfont\chapfnt\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\chapfnt}
+\titleformat{\chapter}[block]
+{\normalfont\chapfnt\bfseries\centering}{}{0pt}{\chapfnt}
 
 \titleformat{\section}
 {\normalfont\secfnt\bfseries}{\thesection}{1em}{}
@@ -27,28 +30,59 @@
 \titleformat{\subsection}
 {\normalfont\ssecfnt\bfseries}{\thesubsection}{1em}{}
 
-\titlespacing*{\chapter} {0pt}{50pt}{40pt}
-\titlespacing*{\section} {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-\titlespacing*{\subsection} {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\chapter} {0pt}{0pt}{2\baselineskip}
+\titlespacing*{\section} {0pt}{1\baselineskip plus 1ex minus .2ex}{.5\baselineskip plus .2ex}
+\titlespacing*{\subsection} {0pt}{1\baselineskip plus 1ex minus .2ex}{.5\baselineskip plus .2ex}
 
 % Environments
-\newenvironment{titlefontsize}
+\newenvironment{chaptersize}
 {%
     \fontsize{16pt}{19pt}\selectfont
 }
 {%
 }
 
-\newenvironment{headingfontsize}
+\newenvironment{sectionsize}
 {%
     \fontsize{14pt}{17pt}\selectfont
 }
 {%
 }
 
-\newenvironment{contentfontsize}
+\newenvironment{subsectionsize}
 {%
     \fontsize{12pt}{14pt}\selectfont
 }
 {%
 }
+
+% Paragraph formatting
+\setlength{\parindent}{0pt}
+
+% Variables
+% Dates
+\newdate{datePublished}{19}{12}{2016}
+
+% Names
+\newcommand{\degreeName}{Bachelor of Technology in Computer Engineering}
+
+\newcommand{\mentorFullName}{Dr.\ Mohammad Najmud Doja}
+\newcommand{\mentorName}{Dr.\ M. N. Doja}
+\newcommand{\mentorJobTitle}{Professor}
+
+\newcommand{\authorsNames}{Ashhar Hasan and Adeela Izhar}
+\newcommand{\authorsBold}{\textbf{Ashhar Hasan} and \textbf{Adeela Izhar}}
+\newcommand{\authorsItalic}{\textit{Ashhar Hasan} and \textit{Adeela Izhar}}
+
+\newcommand{\authorAshhar}{Ashhar Hasan}
+\newcommand{\authorAshharRoll}{13BCS-0015}
+
+\newcommand{\authorAdeela}{Adeela Izhar}
+\newcommand{\authorAdeelaRoll}{13BCS-0006}
+
+\newcommand{\departmentName}{Department of Computer Engineering}
+\newcommand{\facultyName}{Faculty of Engineering and Technology}
+\newcommand{\collegeName}{Jamia Millia Islamia}
+\newcommand{\cityNamePin}{New Delhi --- 110025}
+
+\newcommand{\projectTitle}{Context-Sensitive Spelling Correction}
