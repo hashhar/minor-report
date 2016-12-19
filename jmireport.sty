@@ -9,6 +9,8 @@
 \usepackage[english]{babel} % datetime depends on it
 \usepackage[ddmmyyyy]{datetime} % Dates
 \usepackage{parskip} % No indent paragraphs
+\usepackage{xstring} % Used for making templabels
+\usepackage{suffix} % Define star commands
 
 % Fonts
 \defaultfontfeatures{Ligatures=TeX} % Enable ligatures like --, `' etc.
@@ -63,8 +65,53 @@
 % Dates
 \newdate{datePublished}{19}{12}{2016}
 
-% formatting
+% Formatting
 \newcommand{\textbfit}[1]{\textbf{\textit{#1}}}
+
+\newcommand{\chapterLabel}[1]{%
+    \clearpage
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \chapter{#1}\label{ch:\templabel}
+}
+
+\WithSuffix\newcommand\chapterLabel*[1]{%
+    \clearpage
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \chapter*{#1}\label{ch:\templabel}
+    \addcontentsline{toc}{chapter}{#1}
+}
+
+\newcommand{\sectionLabel}[1]{%
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \section{#1}\label{sec:\templabel}
+}
+
+\WithSuffix\newcommand\sectionLabel*[1]{%
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \section*{#1}\label{sec:\templabel}
+    \addcontentsline{toc}{section}{#1}
+}
+
+\newcommand{\subsectionLabel}[1]{%
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \subsection{#1}\label{subsec:\templabel}
+}
+
+\WithSuffix\newcommand\subsectionLabel*[1]{%
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \subsection*{#1}\label{subsec:\templabel}
+    \addcontentsline{toc}{subsection}{#1}
+}
+
+% Tables
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
 
 % Names
 \newcommand{\degreeName}{Bachelor of Technology in Computer Engineering}
