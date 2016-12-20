@@ -1,27 +1,27 @@
 \chapterLabel*{Abstract}
 
 \textit{\projectTitle{}} is the task of fixing spelling errors that result in
-valid words, such as \textbfit{I'd like to eat desert}, where \textbfit{desert}
-was typed when \textbfit{dessert} was intended. These errors will go undetected
+valid words, such as \ex{I'd like to eat desert}, where \ex{desert}
+was typed when \ex{dessert} was intended. These errors will go undetected
 by conventional spell checkers, which only flag words that are not found in a
 predetermined word list or a dictionary.
 
 \textit{\projectTitle{}} involves learning to characterize the linguistic
-contexts in which different words such as \textbfit{dessert} and
-\textbfit{desert}, tend to occur. The problem is that there is a multitude of
+contexts in which different words such as \ex{dessert} and
+\ex{desert}, tend to occur. The problem is that there is a multitude of
 features one might use to characterize these contexts: features that test for
 the presence of a particular word nearby the target word; features that test
 the parts of speech around the target word; and so on. In general, the number
 of features will range from a few hundred to over ten thousands. A good method
 to filter out features is needed because even after filtering or removing noisy
 features, we will still end up with a large feature space, while the target
-concept (a context in which \textbfit{desert} can occur in this case) depends
+concept (a context in which \ex{desert} can occur in this case) depends
 only on a small subset. For this problem, the class of multiplicative weight
-algorithms like Winnow Algorithm have been shown to have exceptionally good
+algorithms like \textit{Winnow Algorithm} have been shown to have exceptionally good
 theoretical properties.
 
 In the work reported here, we present an algorithm that combines variants of
 Winnow and applies it to the problem of \textit{\projectTitle{}}. We use the
-Winnow Algorithm to find the best set of features which will then be used to
+\textit{Winnow Algorithm} to find the best set of features which will then be used to
 train linear classifiers which try to correct such contextual mismatches using
 the learnt features.

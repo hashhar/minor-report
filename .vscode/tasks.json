@@ -13,6 +13,7 @@
 			"echoCommand": true,
 			"args": [
 				"latexmk",
+				"-bibtex",
 				"-xelatex",
 				"-pdf",
 				"${workspaceRoot}/report.tex"
@@ -24,7 +25,17 @@
 			"args": [
 				"latexmk",
 				"-xelatex",
+				"-bibtex",
 				"-c"
+			]
+		},
+		{
+			"taskName": "full clean",
+			"args": [
+				"latexmk",
+				"-xelatex",
+				"-bibtex",
+				"-C"
 			]
 		},
 		{

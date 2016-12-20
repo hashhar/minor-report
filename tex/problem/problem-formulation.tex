@@ -1,0 +1,34 @@
+\sectionLabel{Problem Formulation}
+
+We treat \textit{\projectTitle{}} as a task of word disambiguation. The
+ambiguity among words is modelled by \textit{confusion sets}. A confusion set
+\(C = \{w_1, ..., w_n\}\) means that each word \(w_i\) in the set is ambiguous
+with each other word \(w_j\) in the set \(C\). Thus if \(C = \{desert,
+dessert\}\), then when the spelling-correction program ses an occurrence of
+either \(desert\) or \(dessert\) in the target document, it takes it to be
+ambiguous between \(desert\) and \(dessert\), and tries to infer from the
+context which of the two it should be.
+
+This treatment requires a collection of confusion sets to start with. There are
+several ways to obtain such a collection. One is based on finding words in the
+dictionary that are one typo away from each other \cite{Mays1991517}. Another finds
+words that have the same or similar pronunciations. Since this was not the
+focus of the work we did, we simply took (most of) our confusion sets from the
+list of ``Common Errors in English Usage'' from the list curated by Paul Brians
+\cite{website:paulbrians}.
+
+A final point concerns the two types of errors a spelling-correction program
+can make: false negatives (complaining about a correct word), and false
+positives (failing to notice an error). We will make the simplifying assumption
+that both kind of errors are equally bad. In practice, however, false negatives
+are much worse, as users get irritated by the programs that badger them with
+bogus complaints. However, given the probabilistic nature of the methods that
+will be presented below, it would not be hard to modify them to take this into
+account. We would merely set a confidence threshold, and report a suggested
+correction only if the probability of the suggested word exceeds the
+probability of the user's original spelling by at least a threshold amount. The
+reason this was not done in the work reported here is that setting the
+confidence threshold involves a certain subjective factor (which depends on the
+user's ``irritability threshold''). Our simplifying assumption allows us to
+measure performance objectively, by the single parameter of prediction
+accuracy.

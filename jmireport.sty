@@ -11,6 +11,17 @@
 \usepackage{parskip} % No indent paragraphs
 \usepackage{xstring} % Used for making templabels
 \usepackage{suffix} % Define star commands
+\usepackage{xcolor} % Define colours
+\usepackage{soul} % Highlighting
+\usepackage{mathtools} % Maths
+\usepackage{hyperref} % Hyperreferences and URLs
+\usepackage{geometry} % Layout
+
+% Set geometry
+\geometry{a4paper, portrait, left=1.5in, right=1.5in, top=1.5in, bottom=1.5in}
+
+% Allow more sloppy line breaks to prevent overfills
+\setlength{\emergencystretch}{12pt}
 
 % Fonts
 \defaultfontfeatures{Ligatures=TeX} % Enable ligatures like --, `' etc.
@@ -22,6 +33,7 @@
 \newcommand{\chapfnt}{\fontsize{16pt}{19pt}}
 \newcommand{\secfnt}{\fontsize{14pt}{17pt}}
 \newcommand{\ssecfnt}{\fontsize{12pt}{14pt}}
+\newcommand{\exfnt}{\fontsize{10pt}{12pt}}
 
 \titleformat{\chapter}[block]
 {\normalfont\chapfnt\bfseries\centering}{}{0pt}{\chapfnt}
@@ -61,12 +73,17 @@
 % Paragraph formatting
 \setlength{\parindent}{0pt}
 
+% Colours
+\definecolor{light-gray}{gray}{0.95}
+
 % Variables
 % Dates
 \newdate{datePublished}{19}{12}{2016}
 
 % Formatting
-\newcommand{\textbfit}[1]{\textbf{\textit{#1}}}
+% \newcommand{\ex}[1]{\colorbox{light-gray}{\exfnt{\texttt{#1}}}}
+\sethlcolor{light-gray}
+\newcommand{\ex}[1]{\hl{\mbox{\exfnt{\texttt{#1}}}}}
 
 \newcommand{\chapterLabel}[1]{%
     \clearpage

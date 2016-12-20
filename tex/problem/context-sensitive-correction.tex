@@ -1,0 +1,39 @@
+\chapterLabel{Problem Statement and Approach}
+\sectionLabel{\projectTitle{}}
+
+With the widespread availability of spell checkers to fix errors that result in
+non-words, such as \ex{teh}, the predominant type of spelling error has become
+the kind that results in a real, but unintended word; for example, typing
+\ex{there} when \ex{their} was intended. Fixing this kind of error requires a
+completely different technology from that used in conventional spell checkers:
+it requires analyzing the context to infer when some other word was more likely
+to have been intended. We call this the task of \textit{\projectTitle{}}. The
+task includes fixing not only ``classic'' types of spelling mistakes, such as
+\textit{homophone errors} (e.g.\ \ex{peace} and \ex{piece}) and
+\textit{typographic errors} (e.g.\ \ex{form} and \ex{from}), but also mistakes
+that are more commonly regarded as \textit{grammatical errors} (e.g.\
+\ex{among} and \ex{between}), and errors that cross \textit{word boundaries}
+(e.g.\ \ex{maybe} and \ex{may be}).
+
+The problem started receiving attention in the literature within about the last
+dozen years. A number of methods have been proposed, either for
+\textit{\projectTitle{}} directly, or for related lexical disambiguation tasks.
+
+The methods include:\\\linebreak
+\textit{Word Trigrams} \cite{Mays1991517},\\
+\textit{Bayesian Classifiers} \cite{gale1992method},\\
+\textit{Bayesian Hybrids} \cite{golding1996bayesian},\\
+\textit{A combination of Part-of-Speech Trigram and Bayesian Hybrids}
+\cite{golding1996combining},\\
+\textit{Transformation-Based Learning} \cite{mangu1997automatic},\\
+\textit{Latent Semantic Analysis} \cite{jones1997contextual},\\
+\textit{Decision Lists} \cite{yarowsky2000hierarchical},\\
+\textit{Noisy Channel Algorithms} \cite{brill2000improved},\\
+\textit{Language Models} \cite{stehouwer2009language},\\
+\textit{OCR to imrpove training} \cite{bassil2012post}.
+
+We believe that a \textit{Winnow Algorithm} based approach is particularly
+promising for this problem, due to the problem's need for a very large number
+of features to characterize the context in which a word occurs, and
+\textit{Winnow Algorithm's} theoretically-demonstrated ability to handle such
+large numbers of features.
