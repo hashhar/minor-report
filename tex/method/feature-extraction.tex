@@ -1,0 +1,79 @@
+\sectionLabel{Feature Extraction Algorithm}
+
+We use a \textit{feature extractor} to convert from the initial text
+representation of a sentence to a list of active features called a
+\textit{feature vector}. The feature extractor has a preprocessing phase in
+which learns a set of features for the task. Thereafter, it can convert a
+sentence into a list of active features simply by matching its set of learned
+features against the sentence.
+
+In the preprocessing phase, the feature extractor learns a set of features that
+characterize the contexts in which each word \(w_i\) in the confusion set tends
+to occur. This involves going through the training corpus, and, each time a
+word in the confusion set occurs, generating all possible features for the
+context --- namely, one context-word feature for every distinct word within
+\(\pm k\) words, and one collocation for every way of expressing a pattern of
+up to \(l\) contiguous elements. This gives an exhaustive list of all features
+found in the training set.
+
+\subsectionLabel{Corpus Preprocessing}
+
+Corpus is first split into complete sentences; each sentence is tokenized into
+list of words and pos tags. For this purpose, Apache's OpenNLP library's .NET
+framework port was used.
+
+\lstset{style=sharpc}
+\addcontentsline{lot}{table}{\textit{Corpus Preprocessing} example}
+\begin{lstlisting}
+public class Sentence
+{
+    public string[] Words { get; set; }
+    public string[] POSTags { get; set; }
+}
+
+private IEnumerable<Sentence> PreProcessCorpora(
+    IEnumerable<string> corpora)
+{
+    var sentences = new ConcurrentBag<sentence>();
+    Parallel.ForEach(corpora, phrase =>
+    {
+        string[] tokens = SplitIntoWords(phrase), posTags;
+        lock (_lock)
+        { posTags = _posTagger.Tag(tokens); }
+        sentences.Add(new Sentence
+        { Words = tokens, POSTags = posTags });
+    });
+
+    return sentences;
+}
+\end{lstlisting}
+
+\subsectionLabel{Getting Context and Collocation Features}
+
+Combing through the training corpus (i.e.\ for each sentence), each time a word
+in the confusion set occurs, get all possible features for the
+context---namely, one context-word feature for every distinct word within \(\pm
+k\) words and \(2\) collocations (occurring before and after word) for every
+way of expressing a pattern of up to \(l\) contiguous elements.
+
+Statistics of occurrence of the features are collected in the process as well,
+namely, for each feature \(F\) we collect for target word \(W\), we record:
+\begin{description}
+    \item [N11] Number of documents (sentences) containing both \(F\) and \(W\).
+    \item [N10] Number of documents containing \(F\) only.
+    \item [N01] Number of documents containing \(W\) only.
+    \item [N00] Number of documents where neither \(W\) nor \(F\) were found.
+    \item [N] Total number of documents.
+\end{description}
+
+\subsectionLabel{Feature Pruning Algorithm}
+
+After these steps, an exhaustive list of all features found in the training
+corpus is generated.At this point, pruning criteria may be applied to eliminate unreliable or
+uninformative features.\\
+We use two criteria (which make use of the aforementioned statistics of
+occurrence):
+\begin{enumerate}
+    \item The feature occurred in practically none or all of the training instances (specifically, it had fewer than 10 occurrences or fewer than 10 non-occurrences)
+    \item The presence of the feature is not significantly correlated with the identity of the target word (determined by a \textit{chi-square test} at the \(0.05\) significance level).
+\end{enumerate}

@@ -1,0 +1,115 @@
+\chapterLabel{Methodology}
+
+\sectionLabel{Data Acquisition}
+
+In the experiments that follow, the training and test sets were drawn from the
+written part of the American National Corpus (OANC) which is about \(14\text{\ } million\)
+words in total, around \(5\text{\ } million\) sentences. We split the data into a \(80-20\)
+split by sentences and used \(28\) confusion sets taken from \textit{Common
+Errors in English Usage} \cite{website:paulbrians} having appreciable frequency
+in our corpus.
+
+The data was further divided into a \textit{Debug Corpus}, a \textit{Release
+Corpus} and a \textit{Test Corpus}. The \textit{Release Corpus} is reduced
+version of the original corpus (\textit{Debug Corpus}) to be used to easily
+evaluate effect of changes made during development without needing to spend
+time on retraining the entire model. The \textit{Test Corpus} is the test data
+used to find accuracy of the classifier. Randomized sets were also drawn during
+testing and training to make sure that the model did not overfit.
+
+\begin{tabularx}{\textwidth}{|L|L|R|}
+    \hline
+    \textbf{Confusion Sets}                        & \textbf{Word} & \textbf{Count}\\
+    \hline
+    \multirow{2}{*}{plaine-plane}                  & plaine        & 84\\
+                                                   & plane         & 517\\
+    \hline
+    \multirow{2}{*}{threw-through}                 & threw         & 923\\
+                                                   & through       & 7210\\
+    \hline
+    \multirow{3}{*}{by-buy-bye}                    & by            & 60361\\
+                                                   & buy           & 12440\\
+                                                   & bye           & 11439\\
+    \hline
+    \multirow{3}{*}{vain-vane-vein}                & vain          & 92\\
+                                                   & vane          & 32\\
+                                                   & vein          & 219\\
+    \hline
+    \multirow{3}{*}{cite-site-sight}               & cite          & 731\\
+                                                   & site          & 4287\\
+                                                   & sight         & 917\\
+    \hline
+    \multirow{2}{*}{loose-lose}                    & loose         & 260\\
+                                                   & lose          & 550\\
+    \hline
+    \multirow{2}{*}{peace-piece}                   & peace         & 1571\\
+                                                   & piece         & 2577\\
+    \hline
+    \multirow{2}{*}{weak-week}                     & weak          & 810\\
+                                                   & week          & 3439\\
+    \hline
+    \multirow{2}{*}{coarse-course}                 & coarse        & 250\\
+                                                   & course        & 3168\\
+    \hline
+    \pagebreak
+    \multirow{2}{*}{knew-new}                      & knew          & 3695\\
+                                                   & new           & 18233\\
+    \hline
+    \multirow{2}{*}{brake-break}                   & brake         & 82\\
+                                                   & break         & 615\\
+    \hline
+    \multirow{2}{*}{hour-our}                      & hour          & 3245\\
+                                                   & our           & 11588\\
+    \hline
+    \multirow{3}{*}{to-too-two}                    & to            & 201119\\
+                                                   & too           & 29787\\
+                                                   & two           & 39437\\
+    \hline
+    \multirow{2}{*}{weather-whether}               & weather       & 1010\\
+                                                   & whether       & 4583\\
+    \hline
+    \multirow{2}{*}{where-were}                    & where         & 14568\\
+                                                   & were          & 41712\\
+    \hline
+    \multirow{2}{*}{hear-here}                     & hear          & 1430\\
+                                                   & here          & 7135\\
+    \hline
+    \multirow{2}{*}{fourth-forth}                  & fourth        & 617\\
+                                                   & forth         & 443\\
+    \hline
+    \multirow{2}{*}{their-there}                   & their         & 23008\\
+                                                   & there         & 19501\\
+    \hline
+    \multirow{2}{*}{\small{complement-compliment}} & complement    & 141\\
+                                                   & compliment    & 50\\
+    \hline
+    \multirow{2}{*}{sea-see}                       & sea           & 1961\\
+                                                   & see           & 9343\\
+    \hline
+    \multirow{2}{*}{desert-dessert}                & desert        & 261\\
+                                                   & dessert       & 81\\
+    \hline
+    \multirow{2}{*}{council-counsel}               & council       & 682\\
+                                                   & counsel       & 731\\
+    \hline
+    \multirow{2}{*}{later-latter}                  & later         & 2761\\
+                                                   & latter        & 1051\\
+    \hline
+    \multirow{2}{*}{waist-waste}                   & waist         & 106\\
+                                                   & waste         & 293\\
+    \hline
+    \multirow{2}{*}{passed-past}                   & passed        & 959\\
+                                                   & past          & 2586\\
+    \hline
+    \multirow{2}{*}{principal-principle}           & principal     & 543\\
+                                                   & principle     & 684\\
+    \hline
+    \multirow{3}{*}{quiet-quit-quite}              & quiet         & 567\\
+                                                   & quit          & 462\\
+                                                   & quite         & 1621\\
+    \hline
+    \multirow{3}{*}{rain-reign-rein}               & rain          & 309\\
+                                                   & reign         & 138\\
+                                                   & rein          & 64\\
+    \hline
+\end{tabularx}

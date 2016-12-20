@@ -1,0 +1,67 @@
+\sectionLabel{Data Preprocessing}
+
+\subsectionLabel{Non-Word Error Correction}
+
+The first sub-step is correction of non-word spelling errors (perhaps by a
+conventional spelling checker). This should occur before context errors are
+sought (rather than after or in parallel), in order to maximize the number of
+words in the text available to check for semantic relatedness to each word
+considered by the algorithm. Moreover, as we observed earlier, it is not
+unusual for context errors to be introduced during conventional spelling
+checking, so context error detection should follow that.
+
+For this stage we used an \textit{Edit Distance} based algorithm to correct non-word errors.
+We used the \textit{GNU Aspell} dictionary for our purposes.
+
+\subsubsection{Edit Distance Algorithm}
+
+The Levenshtein Distance between two words is the minimum number of
+single-character edits (i.e.\ insertions, deletions or substitutions) required
+to change one word into the other.
+
+Mathematically, the Levenshtein Distance between two strings \(a\) and \(b\) is given by:\\
+\begin{equation}
+lev_{a,b}(i,j) =
+  \begin{cases}
+    max(i,j)       & \quad \text{if } min(i,j) = 0\\
+    min
+    \begin{cases}
+        lev_{a,b}(i - 1, j) + 1\\
+        lev_{a,b}(i, j - 1) + 1\\
+        lev_{a,b}(i - 1, j - 1) + 1_{a_i \neq b_j}\\
+    \end{cases}    & \quad \text{ otherwise}\\
+  \end{cases}
+\end{equation}
+
+Where \(1_{(a_i\neq b_j)}\) is the indicator function equal to \(0\) when
+\(a_i=b_j\) and equal to \(1\) otherwise, and
+\(lev_{a,b}(i,j)\) is the distance between the
+first \(i\) characters of \(a\) and the first \(j\) characters of \(b\).
+
+For example, the Levenshtein distance between ``\textit{kitten}'' and
+``\textit{sitting}'' is \(3\), since the following three edits change one into
+the other, and there is no way to do it with fewer than three edits:
+
+\begin{enumerate}
+    \item kitten → sitten (substitution of `s' for `k')
+    \item sitten → sittin (substitution of `i' for `e')
+    \item sittin → sitting (insertion of `g' at the end).
+\end{enumerate}
+
+\subsectionLabel{Identification of Context Errors}
+
+The second sub-step identifies words in the document that are to be checked for
+error by removing from further consideration those that are not in the lexicon
+at all and those that are on a stop-list. The algorithm, by its nature, applies
+only to words whose meaning or meanings are known and have content that is
+likely to be topical. We therefore exclude closed-class words and common
+non-topical words. Closed-class words are excluded as their role in a text is
+almost always purely functional and unrelated to content or topic. It is of
+course possible that a typing error could turn a highly contentful word into a
+closed-class word or vice versa; but the former case will not be considered by
+the algorithm and the latter will be considered but not detected. The exclusion
+of `untopical' open-class words, such as \(know\), \(find\), and \(world\), is
+well-precedented in information retrieval. Here, there is a trade-off between
+making the list as short as possible, in order to let as many words as possible
+be checked, and making the list as long as possible in order to avoid spurious
+relationships.

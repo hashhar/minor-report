@@ -1,0 +1,78 @@
+\sectionLabel{Data Serialization}
+
+In computer science, in the context of data storage, serialization is the
+process of translating data structures or object state into a format that can
+be stored (for example, in a file or memory buffer, or transmitted across a
+network connection) and reconstructed later in the same or another computer
+environment. When the resulting series of bits is reread according to the
+serialization format, it can be used to create a semantically identical clone
+of the original object. For many complex objects, such as those that make
+extensive use of references, this process is not straightforward. Serialization
+of object-oriented objects does not include any of their associated methods
+with which they were previously inextricably linked. This process of
+serializing an object is also called \textit{marshalling} an object. The
+opposite operation, extracting a data structure from a series of bytes, is
+deserialization (which is also called \textit{unmarshalling}).
+
+Data serialization allows to perform operations on test and training data
+``in-memory'' instead of reading them from disk, thus increasing speed.
+Serializing the data structure in an architecture independent format means
+preventing the problems of byte ordering, memory layout, or simply different
+ways of representing data structures in different programming languages.
+Inherent to any serialization scheme is that, because the encoding of the data
+is by definition serial, extracting one part of the serialized data structure
+requires that the entire object be read from start to end, and reconstructed.
+In applications where higher performance is an issue, it can make sense to
+expend more effort to deal with a more complex, non-linear storage
+organization. This algorithm uses an XML representation for the objects.
+Several object-oriented programming languages directly support object
+serialization (or object archival), either by syntactic sugar elements or
+providing a standard interface for doing so.
+\null\vfill
+
+\addcontentsline{lot}{table}{Example \textit{XmlSerializer} serialization}
+\begin{lstlisting}[language=xml]
+<?xml version="1.0"?>
+<ArrayOfSentence
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Sentence>
+        <Words>
+            <string>0%</string>
+            <string>agarose</string>
+            <string>gel</string>
+        </Words>
+        <PosTags>
+            <string>JJ</string>
+            <string>NN</string>
+            <string>NN</string>
+        </PosTags>
+    </Sentence>
+</ArrayOfSentence>
+\end{lstlisting}
+
+\addcontentsline{lot}{table}{Example \textit{DataContract} serialization}
+\begin{lstlisting}[language=xml]
+<ArrayOfComparator>
+  <Comparator>
+    <Cloud>
+      <d3p1:KeyValueOfstringArrayOfanyTypety7Ep6D1>
+        <d3p1:Key>council</d3p1:Key>
+        <d3p1:Value>
+          <d3p1:anyType>
+            <d6p1:Demotion>0.5</d6p1:Demotion>
+            <d6p1:Mistakes>457</d6p1:Mistakes>
+            <d6p1:Promotion>1.5</d6p1:Promotion>
+            <d6p1:Threshold>1</d6p1:Threshold>
+            <d6p1:Weights>
+              <d3p1:double>2.4892E-60</d3p1:double>
+              <d3p1:double>6.5253E-55</d3p1:double>
+              <d3p1:double>8.0779E-28</d3p1:double>
+            </d6p1:Weights>
+          </d3p1:anyType>
+        </d3p1:Value>
+      </d3p1:KeyValueOfstringArrayOfanyTypety7Ep6D1>
+    </Cloud>
+  </Comparator>
+</ArrayOfComparator>
+\end{lstlisting}
